@@ -17,9 +17,7 @@ export const metadata = {
   title: "Personal Expense Tracker",
   description: "Track and manage your personal expenses easily with this app.",
   keywords: "personal finance, expense tracker, budget, money management",
-  viewport: "width=device-width, initial-scale=1.0",
   robots: "index, follow",
-  themeColor: "#60E5AE",
   openGraph: {
     title: "Personal Expense Tracker",
     description:
@@ -28,7 +26,20 @@ export const metadata = {
     url: "https://your-deployed-app.com",
     siteName: "Personal Expense Tracker",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Personal Expense Tracker",
+    description:
+      "Track and manage your personal expenses easily with this app.",
+  },
 };
+
+// Global viewport & theme color
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+export const themeColor = "#60E5AE";
 
 export default function RootLayout({ children }) {
   return (

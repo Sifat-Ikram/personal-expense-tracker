@@ -1,6 +1,13 @@
 import ChartComponent from "@/components/ChartComponent";
 import Head from "next/head";
 
+export const metadata = {
+  title: "Expenses Chart | Personal Expense Tracker",
+  description:
+    "Visualize your personal expenses by category using interactive charts.",
+  robots: "noindex, nofollow",
+};
+
 export default async function ChartPage() {
   let expenses = [];
   try {
@@ -12,18 +19,5 @@ export default async function ChartPage() {
     console.error("Error fetching expenses:", error);
   }
 
-  return (
-    <>
-      <Head>
-        <title>Expenses Chart | Personal Expense Tracker</title>
-        <meta
-          name="description"
-          content="Visualize your personal expenses by category using interactive charts."
-        />
-        <meta name="robots" content="noindex, nofollow" />
-      </Head>
-
-      <ChartComponent />
-    </>
-  );
+  return <ChartComponent expenses={expenses} />;
 }
