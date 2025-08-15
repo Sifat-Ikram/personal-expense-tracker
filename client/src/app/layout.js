@@ -25,13 +25,7 @@ export const metadata = {
     type: "website",
     url: "https://your-deployed-app.com",
     siteName: "Personal Expense Tracker",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Personal Expense Tracker",
-    description:
-      "Track and manage your personal expenses easily with this app.",
-  },
+  }
 };
 
 // Global viewport & theme color

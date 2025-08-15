@@ -86,29 +86,24 @@ export default function DashboardLayout({ children }) {
               </button>
               <div ref={menuRef}>
                 {isMenuOpen && (
-                  <div className="absolute left-0 w-36 bg-[#60E5AE] text-black rounded-lg shadow-lg transition duration-200 z-50">
+                  <div className="absolute left-0 w-28 bg-[#008080] text-black rounded-lg shadow-lg transition duration-200 z-50">
                     <Link
                       href="/dashboard/allExpenses"
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center px-4 py-2 hover:bg-[#66b695] hover:rounded-lg space-x-2"
+                      className="flex items-center px-4 py-2 group text-center hover:rounded-t-lg hover:bg-white space-x-2"
                     >
-                      <Image
-                        src={expense}
-                        alt="expense"
-                        width={20}
-                        height={20}
-                      />
-                      <span className="text-sm font-medium jakarta">
+                      <span className="text-sm font-medium jakarta text-white group-hover:text-gray-700">
                         Expenses
                       </span>
                     </Link>
                     <Link
                       href="/dashboard/chart"
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center px-4 py-2 hover:bg-[#66b695] hover:rounded-lg space-x-2"
+                      className="flex items-center px-4 py-2 group text-center hover:rounded-b-lg hover:bg-white space-x-2"
                     >
-                      <Image src={wheel} alt="spin" width={20} height={20} />
-                      <span className="text-sm font-medium jakarta">Spin</span>
+                      <span className="text-sm font-medium jakarta text-white group-hover:text-gray-700">
+                        Chart
+                      </span>
                     </Link>
                   </div>
                 )}
@@ -167,11 +162,10 @@ export default function DashboardLayout({ children }) {
 
           <div className="flex items-center space-x-[2px] lg:space-x-2">
             <IoPersonCircleSharp className="text-lg sm:text-2xl lg:text-3xl" />
-            <h1 className="text-sm sm:text-lg xl:text-xl font-semibold poppins">
+            <h1 className="text-sm sm:text-lg truncate xl:text-xl font-semibold poppins">
               {userName}
             </h1>
             <div className="relative pb-2">
-              {/* Dropdown Icon */}
               <IoChevronDownSharp
                 onClick={() => setIsUserOpen((prev) => !prev)}
                 className="text-base sm:text-lg cursor-pointer mt-2"
@@ -180,10 +174,10 @@ export default function DashboardLayout({ children }) {
               {/* Hover Dropdown */}
               <div ref={userRef}>
                 {isUserOpen && (
-                  <div className="absolute right-0 top-full bg-[#60E5AE] border rounded-lg shadow-lg transition duration-200 z-50">
+                  <div className="absolute right-0 top-full bg-[#008080] group rounded-lg shadow-lg transition duration-200 z-50">
                     <button
                       onClick={handleLogout}
-                      className="w-full text-center px-4 cursor-pointer py-2 text-sm hover:bg-[#66b695] rounded-md"
+                      className="w-full text-center px-8 group-hover:text-gray-700 cursor-pointer py-2 text-sm group-hover:bg-white rounded-md"
                     >
                       Logout
                     </button>

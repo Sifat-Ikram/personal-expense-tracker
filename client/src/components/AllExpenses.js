@@ -30,15 +30,15 @@ export default function AllExpenses() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-        <h2 className="text-base sm:text-lg lg:text-xl font-bold">
+        <h2 className="text-lg sm:text-xl lg:text-3xl font-bold">
           Expenses List
         </h2>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center flex-wrap gap-2 sm:gap-3 md:gap-4 lg:gap-5">
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="border border-[#E1E1E1] rounded-md px-3 py-2 text-sm sm:text-base text-[#667085] jakarta font-medium"
+            className="border border-[#E1E1E1] rounded-md px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-2 md:py-2 lg:py-3 text-xs sm:text-sm md:text-base lg:text-base text-[#667085] jakarta font-medium"
           >
             <option value="All">Select Task Category</option>
             {categories.map((cat) => (
@@ -49,7 +49,7 @@ export default function AllExpenses() {
           </select>
 
           <Link href="/dashboard/addExpense">
-            <button className="bg-[#60E5AE] text-sm sm:text-base jakarta cursor-pointer text-[#1F1F1F] px-2 sm:px-4 lg:px-6 py-[2px] sm:py-2 lg:py-3  rounded-[8px]">
+            <button className="bg-[#008080] text-xs sm:text-sm md:text-base lg:text-base jakarta cursor-pointer text-white px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-2 md:py-2 lg:py-3 rounded-[8px] whitespace-nowrap">
               Add Expense
             </button>
           </Link>
