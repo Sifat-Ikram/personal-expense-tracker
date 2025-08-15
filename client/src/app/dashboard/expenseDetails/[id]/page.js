@@ -14,13 +14,12 @@ export async function generateStaticParams() {
 
 // Dynamic page component (Server Component)
 export default async function ExpenseDetailsPage({ params }) {
-  // Correct: Access params directly, no await needed
   const { id } = params;
   const API_URL = process.env.API_URL || "http://localhost:5000";
 
   // Fetch single expense data with ISR
   const res = await fetch(`${API_URL}/api/expenses/${id}`, {
-    next: { revalidate: 60 }, // Revalidate every 60s
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) {
@@ -35,7 +34,7 @@ export default async function ExpenseDetailsPage({ params }) {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 py-8 bg-gray-50 dark:bg-gray-900">
-      <ExpenseDetailsCard expense={expense} />
+      <ExpenseDetailsCard id={id} />
     </div>
   );
 }
