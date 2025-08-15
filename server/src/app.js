@@ -7,6 +7,7 @@ dotenv.config();
 import { connectDB } from "./config/db.config.js";
 import userRoutes from "./routes/user.routes.js";
 import expenseRoutes from "./routes/expense.routes.js";
+import categoyRoutes from "./routes/category.routes.js";
 import resetPassword from "./routes/resetPassword.routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
@@ -36,6 +37,7 @@ app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/category", categoyRoutes);
 app.use("/api", resetPassword);
 
 app.get("/api/health", (req, res) => res.status(200).json({ status: "OK" }));

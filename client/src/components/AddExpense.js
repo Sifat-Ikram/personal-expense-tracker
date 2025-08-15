@@ -1,10 +1,11 @@
 "use client";
-
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useFetchCategories } from "@/hooks/useFetchCategories";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 export default function AddExpense() {
+  const { categories } = useFetchCategories();
   const {
     register,
     handleSubmit,
@@ -63,14 +64,28 @@ export default function AddExpense() {
 
         {/* Category & Amount */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Category */}
           <div>
             <label className="block mb-1 font-semibold">Category</label>
-            <input
-              {...register("category")}
-              placeholder="Food"
+            <select
+              {...register("category", { required: "Category is required" })}
               className="w-full p-2 border border-gray-500 rounded-md focus:outline-teal-600"
-            />
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select a category
+              </option>
+              {categories?.map((cat) => (
+                <option key={cat._id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+            {errors.category && (
+              <p className="text-red-500 text-sm">{errors.category.message}</p>
+            )}
           </div>
+
           <div>
             <label className="block mb-1 font-semibold">Amount</label>
             <input
@@ -92,7 +107,7 @@ export default function AddExpense() {
           <input
             type="date"
             {...register("date", { required: "Date is required" })}
-            defaultValue="2025-06-22"
+            defaultValue="pick a date"
             className="w-full p-2 border border-gray-500 rounded-md focus:outline-teal-600"
           />
           {errors.date && (
@@ -100,32 +115,10 @@ export default function AddExpense() {
           )}
         </div>
 
-        {/* Short Description */}
-        <div>
-          <label className="block mb-1 font-semibold">Short Description</label>
-          <textarea
-            {...register("shortDescription")}
-            placeholder="Bought fruits and vegetables"
-            rows={2}
-            className="w-full p-2 border border-gray-500 rounded-md focus:outline-teal-600"
-          />
-        </div>
-
-        {/* Long Description */}
-        <div>
-          <label className="block mb-1 font-semibold">Long Description</label>
-          <textarea
-            {...register("longDescription")}
-            placeholder="Purchased groceries from the local market including apples, oranges, carrots, and milk."
-            rows={4}
-            className="w-full p-2 border border-gray-500 rounded-md focus:outline-teal-600"
-          />
-        </div>
-
         {/* Submit */}
         <button
           type="submit"
-          className="bg-[#60E5AE] cursor-pointer text-[#1F1F1F] px-6 py-3 rounded-[8px] w-full sm:w-auto"
+          className="bg-[#008080] text-white hover:bg-[#006666] cursor-pointer buttons w-full"
         >
           Add Expense
         </button>

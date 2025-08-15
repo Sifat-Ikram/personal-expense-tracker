@@ -103,7 +103,7 @@ export default function DashboardLayout({ children }) {
                       </span>
                     </Link>
                     <Link
-                      href="/dashboard/spinningWheel"
+                      href="/dashboard/chart"
                       onClick={() => setIsMenuOpen(false)}
                       className="flex items-center px-4 py-2 hover:bg-[#66b695] hover:rounded-lg space-x-2"
                     >
@@ -133,7 +133,7 @@ export default function DashboardLayout({ children }) {
           {/* Navigation */}
           <div className="hidden sm:flex items-center space-x-3 sm:space-x-4 md:space-x-5 xl:space-x-6">
             <Link
-              href="/dashboard/allTasks"
+              href="/dashboard/allExpenses"
               className="flex items-center space-x-1 sm:space-x-2"
             >
               <Image
@@ -149,7 +149,7 @@ export default function DashboardLayout({ children }) {
             </Link>
 
             <Link
-              href="/dashboard/spinningWheel"
+              href="/dashboard/chart"
               className="flex items-center space-x-1 sm:space-x-2"
             >
               <Image

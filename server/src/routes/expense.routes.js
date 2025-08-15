@@ -17,7 +17,7 @@ router.get("/get", getExpenses);
 
 router.get("/:id", getExpenseById);
 
-router.post("/", createExpense);
+router.post("/create", createExpense);
 
 router.patch("/:id", updateExpense);
 

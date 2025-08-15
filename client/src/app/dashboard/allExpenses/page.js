@@ -1,20 +1,14 @@
 "use client";
+import ExpenseCard from "@/components/expenseCard";
+import { useFetchCategories } from "@/hooks/useFetchCategories";
 import { useFetchExpenses } from "@/hooks/useFetchExpenses";
 import Link from "next/link";
 import { useState } from "react";
 
-const categories = [
-  "Art and Craft",
-  "Nature",
-  "Family",
-  "Sport",
-  "Friends",
-  "Meditation",
-];
-
 export default function TaskListPage() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const { expenses, loading, error, refetch } = useFetchExpenses();
+  const { categories } = useFetchCategories();
 
   if (loading) {
     return <p className="text-center text-gray-500">Loading tasks...</p>;
@@ -31,7 +25,7 @@ export default function TaskListPage() {
   const filteredExpenses = expenses.filter((expense) => {
     const categoryMatch =
       categoryFilter === "All" || expense.category === categoryFilter;
-    return categoryMatch && statusMatch;
+    return categoryMatch;
   });
 
   console.log(filteredExpenses);
@@ -39,7 +33,7 @@ export default function TaskListPage() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-        <h2 className="text-base sm:text-lg lg:text-xl font-bold">
+        <h2 className="text-base sm:text-lg lg:text-2xl font-semibold">
           Expenses List
         </h2>
 
@@ -51,8 +45,8 @@ export default function TaskListPage() {
           >
             <option value="All">Select Task Category</option>
             {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+              <option key={cat._id} value={cat.name}>
+                {cat.name}
               </option>
             ))}
           </select>
@@ -65,15 +59,19 @@ export default function TaskListPage() {
         </div>
       </div>
 
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {filteredTasks.length > 0 ? (
-          filteredTasks.slice(0, 10).map((task) => (
-            <TaskCard key={task._id} task={task} onDelete={refetch} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {filteredExpenses.length > 0 ? (
+          filteredExpenses.map((expense) => (
+            <ExpenseCard
+              key={expense._id}
+              expense={expense}
+              onDelete={refetch}
+            />
           ))
         ) : (
           <p className="text-gray-500">No tasks found for selected filters.</p>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }
