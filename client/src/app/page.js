@@ -1,7 +1,7 @@
 import AuthForm from "@/components/auth/AuthForm";
 import Head from "next/head";
 import Image from "next/image";
-import login from "@/assets/login.jpeg";
+import login from "@/assets/login.png";
 
 export default function LoginPage() {
   return (

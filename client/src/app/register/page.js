@@ -1,7 +1,7 @@
 import AuthForm from "@/components/auth/AuthForm";
 import Head from "next/head";
 import Image from "next/image";
-import login from "@/assets/login.jpeg";
+import register from "@/assets/register.png";
 
 export default function LoginPage() {
   return (
@@ -13,8 +13,8 @@ export default function LoginPage() {
         {/* Left Side - Image/Branding */}
         <div className="hidden relative md:flex md:w-1/2 text-white flex-col items-center justify-center p-10">
           <Image
-            src={login}
-            alt="login"
+            src={register}
+            alt="register"
             fill
             priority
             className="h-full w-full"

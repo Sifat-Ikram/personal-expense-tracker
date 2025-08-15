@@ -6,9 +6,12 @@ import InputField from "./InputField";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import useAxiosPublic from "@/hooks/useAxiosPublic.js";
+import Swal from "sweetalert2";
 
 export default function AuthForm({ type }) {
   const router = useRouter();
+  const axiosPublic = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const {
@@ -28,6 +31,8 @@ export default function AuthForm({ type }) {
     }
   }, [setValue]);
 
+
+
   const onSubmit = async (data) => {
     if (rememberMe) {
       localStorage.setItem("rememberEmail", data.email);
@@ -36,18 +41,39 @@ export default function AuthForm({ type }) {
       localStorage.removeItem("rememberEmail");
       localStorage.removeItem("rememberPassword");
     }
+    
     try {
-      //   const endpoint =
-      //     type === "login" ? "/api/auth/login" : "/api/auth/register";
-      //   const res = await axios.post(endpoint, data);
-      //   alert(`${type === "login" ? "Logged in" : "Registered"} successfully`);
+      const endpoint =
+        type === "login" ? "/api/user/login" : "/api/user/register";
+      const res = await axiosPublic.post(endpoint, data);
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title:
+          type === "login"
+            ? "Logged in successfully"
+            : "Registered successfully",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+      });
 
-      //   localStorage.setItem("accessToken", res.data.accessToken);
-      //   localStorage.setItem("refreshToken", res.data.refreshToken);
-      //   localStorage.setItem("expiresIn", res.data.expiresIn);
-      router.push(type === "login" ? "/dashboard" : "/auth/login");
+      localStorage.setItem("userName", res.data.user.name);
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
+      localStorage.setItem("expiresIn", res.data.expiresIn);
+      router.push(type === "login" ? "/dashboard/allExpenses" : "/");
     } catch (error) {
-      alert("Something went wrong");
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title:"Something went wrong. Try again please.",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+      });
       console.error(error);
     }
   };
@@ -68,8 +94,9 @@ export default function AuthForm({ type }) {
       {type === "register" && (
         <InputField
           label="Full Name"
-          placeholder="John Doe"
-          {...register("username", { required: "Name is required" })}
+          type="text"
+          placeholder="Enter Your Full Name"
+          {...register("name", { required: "Name is required" })}
           error={errors.username && errors.username.message}
         />
       )}

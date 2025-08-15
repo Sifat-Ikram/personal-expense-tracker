@@ -73,7 +73,12 @@ export const login = async (req, res, next) => {
       sameSite: isProduction ? "None" : "Lax",
     });
 
-    res.status(200).json({ user });
+    res.status(200).json({
+      user,
+      accessToken,
+      refreshToken,
+      expiresIn,
+    });
   } catch (err) {
     next(err);
   }

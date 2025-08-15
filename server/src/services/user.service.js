@@ -51,7 +51,6 @@ export const loginUser = async (email, password) => {
     refreshToken,
     expiresIn: 15 * 60,
     user: {
-      id: user._id,
       name: user.name,
       email: user.email
     },
