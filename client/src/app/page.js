@@ -7,8 +7,14 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Login page</title>
+        <title>Login | Personal Expense Tracker</title>
+        <meta
+          name="description"
+          content="Login to access your personal expense tracker dashboard."
+        />
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
+      
       <div className="min-h-screen flex flex-col md:flex-row">
         {/* Left Side - Image/Branding */}
         <div className="hidden relative md:flex md:w-1/2 text-white flex-col items-center justify-center p-10">

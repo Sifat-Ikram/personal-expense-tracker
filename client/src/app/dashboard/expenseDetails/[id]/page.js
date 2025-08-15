@@ -1,5 +1,6 @@
 // src/app/dashboard/expenseDetails/[id]/page.js
 import ExpenseDetailsCard from "@/components/ExpenseDetailsCard";
+import Head from "next/head";
 
 // Optional: Pre-generate paths for SSG
 export async function generateStaticParams() {
@@ -14,7 +15,7 @@ export async function generateStaticParams() {
 
 // Dynamic page component (Server Component)
 export default async function ExpenseDetailsPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const API_URL = process.env.API_URL || "http://localhost:5000";
 
   // Fetch single expense data with ISR
@@ -33,7 +34,12 @@ export default async function ExpenseDetailsPage({ params }) {
   const expense = await res.json();
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 py-8 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 py-8 bg-gray-50">
+      <Head>
+        <title>Expense Details | Personal Expense Tracker</title>
+        <meta name="description" content={`Details for expense ID: ${id}`} />
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <ExpenseDetailsCard id={id} />
     </div>
   );
