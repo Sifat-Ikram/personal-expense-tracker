@@ -1,5 +1,5 @@
 "use client";
-import ExpenseCard from "@/components/expenseCard";
+import ExpenseCard from "@/components/ExpenseCard";
 import { useFetchCategories } from "@/hooks/useFetchCategories";
 import { useFetchExpenses } from "@/hooks/useFetchExpenses";
 import Link from "next/link";
@@ -33,7 +33,7 @@ export default function TaskListPage() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-        <h2 className="text-base sm:text-lg lg:text-2xl font-semibold">
+        <h2 className="text-base sm:text-lg lg:text-xl font-bold">
           Expenses List
         </h2>
 

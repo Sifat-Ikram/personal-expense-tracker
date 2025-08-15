@@ -1,16 +1,19 @@
+"use client";
+
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { LuClipboardPen } from "react-icons/lu";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { BsTagFill } from "react-icons/bs";
-import { motion } from "framer-motion";
 
 export default function ExpenseCard({ expense, onDelete }) {
   const axiosPublic = useAxiosPublic();
 
-  const handleDeleteExpense = async (id) => {
+  const handleDeleteExpense = async (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
     try {
-      // Show confirmation dialog first
       const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -22,7 +25,7 @@ export default function ExpenseCard({ expense, onDelete }) {
       });
 
       if (result.isConfirmed) {
-        await axiosPublic.delete(`/api/tasks/delete/${id}`);
+        await axiosPublic.delete(`/api/expenses/${id}`);
 
         Swal.fire({
           icon: "success",
@@ -31,6 +34,7 @@ export default function ExpenseCard({ expense, onDelete }) {
           timer: 2000,
           showConfirmButton: false,
         });
+
         if (onDelete) onDelete();
       }
     } catch (error) {
@@ -43,47 +47,53 @@ export default function ExpenseCard({ expense, onDelete }) {
   };
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-      className="border border-gray-300 rounded-xl p-4 sm:p-6 lg:p-8 bg-white shadow hover:shadow-lg transition-shadow w-full max-w-md mx-auto"
-    >
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800">
-            {expense.title}
-          </h3>
-          <div className="flex flex-col gap-2 mt-4">
-            <span className="flex items-center text-xs sm:text-sm">
-              Category {expense.category}
+    <Link href={`/dashboard/expenseDetails/${expense._id}`}>
+      <motion.div
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 md:p-6 lg:p-6 shadow-md hover:shadow-xl transition-all duration-300 w-full max-w-lg mx-auto cursor-pointer"
+      >
+        <div className="flex flex-col justify-between gap-3">
+          <div className="relative">
+            <h3
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 pr-10 
+truncate max-h-12 sm:max-h-14 md:max-h-16 lg:max-h-20 overflow-hidden"
+            >
+              {expense.title}
+            </h3>
+            <button
+              onClick={(e) => handleDeleteExpense(expense._id, e)}
+              className="text-red-500 hover:text-red-600 absolute top-0 right-0"
+              title="Delete expense"
+            >
+              <RiDeleteBin6Line size={16} />
+            </button>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-700 text-sm sm:text-base md:text-lg">
+            <span className="font-medium">Category:</span>
+            <span className="truncate">{expense.category}</span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-700 text-sm sm:text-base md:text-lg">
+            <span className="font-medium">Amount:</span>
+            <span className=" font-semibold">
+              {expense.amount.toLocaleString()} taka
             </span>
-            <span className="text-sm sm:text-base font-medium text-gray-700">
-              Amount: {expense.amount.toLocaleString()}
+          </div>
+
+          <div className="flex items-center gap-1 text-gray-500 text-xs sm:text-sm mt-2">
+            <LuClipboardPen className="w-4 h-4" />
+            <span>
+              {new Date(expense.date).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </span>
           </div>
         </div>
-
-        <button
-          onClick={() => handleDeleteExpense(expense._id)}
-          className="text-red-500 hover:text-red-600 ml-2"
-          title="Delete expense"
-        >
-          <RiDeleteBin6Line size={20} />
-        </button>
-      </div>
-
-      <div className="flex justify-between items-center mt-4 text-gray-500 text-xs sm:text-sm">
-        <div className="flex items-center gap-1">
-          <LuClipboardPen />
-          <span>
-            {new Date(expense.date).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </span>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
