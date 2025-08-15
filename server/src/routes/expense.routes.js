@@ -1,6 +1,6 @@
 import express from "express";
 
-// import { protect } from "../middlewares/auth.middleware.js";
+import { protect } from "../middlewares/auth.middleware.js";
 import {
   createExpense,
   deleteExpense,
@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-// router.use(protect);
+router.use(protect);
 
 router.get("/get", getExpenses);
 

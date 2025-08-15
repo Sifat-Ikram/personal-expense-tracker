@@ -66,7 +66,7 @@ export default function AllExpenses() {
             />
           ))
         ) : (
-          <p className="text-gray-500">No tasks found for selected filters.</p>
+          <p className="text-gray-500 text-center">No tasks found for selected filters.</p>
         )}
       </div>
     </div>

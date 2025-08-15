@@ -16,8 +16,8 @@ export const forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // const token = generateResetToken(user._id);
-    // const resetLink = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+    const token = generateResetToken(user._id);
+    const resetLink = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
 
     return res.status(200).json({
       message: "Reset link generated",

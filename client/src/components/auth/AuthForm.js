@@ -137,7 +137,7 @@ export default function AuthForm({ type }) {
 
           {type === "login" && (
             <a
-              href="/forgot-password"
+              href="/forgotPassword"
               className="text-[#008080] hover:underline text-sm"
             >
               Forgot Password?

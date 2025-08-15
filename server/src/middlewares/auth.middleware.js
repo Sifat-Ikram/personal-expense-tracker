@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 
 export const protect = (req, res, next) => {
-  // 1. Check Authorization header
   let token;
   if (
     req.headers.authorization &&
@@ -10,7 +9,6 @@ export const protect = (req, res, next) => {
     token = req.headers.authorization.split(" ")[1];
   }
 
-  // 2. Fallback to cookie if no token in header
   if (!token && req.cookies?.accessToken) {
     token = req.cookies.accessToken;
   }

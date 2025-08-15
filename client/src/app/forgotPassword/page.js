@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ForgotPassword = () => {
   const {
@@ -27,13 +28,10 @@ const ForgotPassword = () => {
         email: data.email,
       });
       const resetLink = response?.data?.resetURL;
-      console.log(resetLink);
 
       if (resetLink) {
-        // Redirect to reset password page
         router.push(resetLink);
       } else {
-        // No resetURL found, show success message anyway
         setMessage(
           "If this email is registered, you will receive a password reset link shortly."
         );
@@ -89,13 +87,23 @@ const ForgotPassword = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-[#60E5AE] jakarta cursor-pointer text-[#1F1F1F] font-semibold text-lg transition-colors duration-300 py-[15px] rounded-[8px]"
-              >
-                {loading ? "Resetting Password..." : "Reset Password"}
-              </button>
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 w-full">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 text-center py-2 sm:py-3 bg-[#008080] text-white hover:bg-[#006666] font-semibold text-xs sm:text-sm md:text-base lg:text-lg rounded-md transition-all duration-200"
+                >
+                  {loading ? "Resetting Password..." : "Reset Password"}
+                </button>
+
+                <Link
+                  href={"/"}
+                  className="flex-1 text-center py-2 sm:py-3 bg-white text-[#006666] hover:text-white border-[2px] border-[#006666] hover:border-transparent hover:bg-[#006666] font-semibold text-xs sm:text-sm md:text-base lg:text-lg rounded-md transition-all duration-200"
+                >
+                  Back
+                </Link>
+              </div>
+
               {message.length > 0 && <h1 className="text-center">{message}</h1>}
             </form>
           </div>

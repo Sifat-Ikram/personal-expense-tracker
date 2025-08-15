@@ -1,24 +1,29 @@
-// src/app/dashboard/expenseDetails/[id]/page.js
 import ExpenseDetailsCard from "@/components/ExpenseDetailsCard";
 import Head from "next/head";
 
-// Optional: Pre-generate paths for SSG
 export async function generateStaticParams() {
   const API_URL = process.env.API_URL || "http://localhost:5000";
   const res = await fetch(`${API_URL}/api/expenses/get`);
-  const expenses = await res.json();
+
+  if (!res.ok) {
+    console.error("Failed to fetch expenses");
+    return [];
+  }
+
+  const data = await res.json();
+  const expenses = Array.isArray(data) ? data : data.data;
+
+  if (!Array.isArray(expenses)) return [];
 
   return expenses.map((expense) => ({
     id: expense._id,
   }));
 }
 
-// Dynamic page component (Server Component)
 export default async function ExpenseDetailsPage({ params }) {
   const { id } = await params;
   const API_URL = process.env.API_URL || "http://localhost:5000";
 
-  // Fetch single expense data with ISR
   const res = await fetch(`${API_URL}/api/expenses/${id}`, {
     next: { revalidate: 60 },
   });

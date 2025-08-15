@@ -1,5 +1,6 @@
 "use client";
 
+import { useFetchExpenses } from "@/hooks/useFetchExpenses";
 import { useState, useEffect } from "react";
 import {
   Pie,
@@ -10,7 +11,8 @@ import {
   PieChart,
 } from "recharts";
 
-export default function ChartComponent({ expenses }) {
+export default function ChartComponent() {
+  const { expenses, loading, error} = useFetchExpenses();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -19,6 +21,22 @@ export default function ChartComponent({ expenses }) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  if (!Array.isArray(expenses) || expenses.length === 0) {
+    return <p className="text-gray-500">No expense data available.</p>;
+  }
+
+  if (loading) {
+    return <p className="text-center text-gray-500">Loading tasks...</p>;
+  }
+
+  if (error) {
+    return (
+      <p className="text-center text-red-500">
+        Oops! Something went wrong: {error}
+      </p>
+    );
+  }
 
   const categoryData =
     expenses?.reduce((acc, expense) => {
