@@ -1,6 +1,6 @@
 # Personal Expense Tracker
 
-A **Personal Expense Tracker** web application built with **MERN stack** (MongoDB, Express.js, React/Next.js, Node.js). Users can add, view, edit, and delete expenses. This project also includes optional bonus features like filtering, charts, and JWT authentication.
+A **Personal Expense Tracker** web application built with **MERN stack** (MongoDB, Express.js, Next.js, Node.js). Users can add, view, edit, and delete expenses. This project also includes optional bonus features like filtering, charts, and JWT authentication.
 
 ---
 
@@ -42,8 +42,6 @@ A **Personal Expense Tracker** web application built with **MERN stack** (MongoD
 
 ---
 
----
-
 ## **API Endpoints**
 
 | Method | Endpoint             | Description                     |
@@ -69,8 +67,15 @@ A **Personal Expense Tracker** web application built with **MERN stack** (MongoD
 - MongoDB (Atlas)
 - npm
 
-### **Backend Setup**
+### **Setup**
+
 ```bash
+**Frontend**
+cd client
+npm install
+npm run dev
+
+**Backend**
 cd server
 npm install
 # Create a .env file with:
@@ -81,14 +86,4 @@ npm install
 # NODE_ENV=production
 # CLIENT_URL=https://personal-expense-tracker-flame-psi.vercel.app
 npm run dev
-
----
-
-### **Frontend Setup**
-```bash
-cd client
-npm install
-npm run dev
----
-Then open http://localhost:3000 to view the app.
 
