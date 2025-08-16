@@ -5,8 +5,8 @@ A **Personal Expense Tracker** web application built with **MERN stack** (MongoD
 ---
 
 ## **Demo**
-**Frontend:** [Your Frontend Live Link](https://personal-expense-tracker-flame-psi.vercel.app)  
-**Backend:** [Your Backend Live Link](https://personal-expense-tracker-server-six.vercel.app)
+**Frontend:** [Frontend Live Link](https://personal-expense-tracker-flame-psi.vercel.app)  
+**Backend:** [Backend Live Link](https://personal-expense-tracker-server-six.vercel.app)
 
 ---
 
@@ -82,11 +82,13 @@ npm install
 # CLIENT_URL=https://personal-expense-tracker-flame-psi.vercel.app
 npm run dev
 
+---
+
 ### **Frontend Setup**
 ```bash
 cd client
 npm install
 npm run dev
-
+---
 Then open http://localhost:3000 to view the app.
 
